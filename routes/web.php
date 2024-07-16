@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -122,3 +125,30 @@ Route::prefix('cars')->group(function () {
         });
     });
 });
+// Route::fallback(function (){
+// return  Redirect('/');
+
+
+// });
+Route::get('/cv' ,  [ExampleController::class ,'cv']);
+Route::get('/task3' ,  [ExampleController::class ,'task3']);
+Route::get('/task3go' ,  [ExampleController::class ,'task3go'])->name('task3in');
+
+
+
+Route::get('link' , function(){
+$url = route('w');
+return "<a href='$url' >go to welcome</a>";
+
+
+});
+
+Route::get('welcome', function(){
+
+return "welcome to laravel";
+
+})->name('w');
+
+Route::get('login' , [ExampleController::class ,'login']);
+Route::post('logindone',[ExampleController::class , 'logincheck'] )->name('logindone');
+
