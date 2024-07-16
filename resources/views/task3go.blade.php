@@ -19,6 +19,14 @@ $messege= $_GET['messege'];
 <div><?php echo $email ;?></div>
 <div><?php  echo $subject ;?></div>
 <div><?php echo $messege ;?></div>
+div><?php echo $name ;?></div>
+<div><?php echo $email ;?></div>
+<div><?php  echo $subject ;?></div>
+<div><?php echo $messege ;?></div>
+div><?php echo $name ;?></div>
+<div><?php echo $email ;?></div>
+<div><?php  echo $subject ;?></div>
+<div><?php echo $messege ;?></div>
 
 </body>
 </html>
