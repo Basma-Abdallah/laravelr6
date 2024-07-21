@@ -30,20 +30,20 @@ class ClassController extends Controller
     public function store(Request $request)
     {
        //dd($request);
-    //   $className=$request->className;
-    //   $price=$request->price;
-    //   $capacity=$request->capacity;
-    //   $is_fulled= $request->fulled;
-    //   $timeFrom= $request->time_from;
-    //   $timeTo= $request->time_to;
+      $className=$request->className;
+      $price=$request->price;
+      $capacity=$request->capacity;
+      $is_fulled= $request->fulled;
+      $timeFrom= $request->time_from;
+      $timeTo= $request->time_to;
 
 
-      $className="test";
-      $price=22;
-      $capacity=33;
-      $is_fulled= true;
-      $timeFrom= 555;
-      $timeTo= 5555;
+    //   $className="test";
+    //   $price=22;
+    //   $capacity=33;
+    //   $is_fulled= true;
+    //   $timeFrom= 555;
+    //   $timeTo= 5555;
 
 
 

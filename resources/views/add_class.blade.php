@@ -48,20 +48,20 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time from</label>
             <div class="col-md-10">
-              <input id="" class="form-control py-2" name="time_from" />
+              <input  type="time" id="" class="form-control py-2" name="time_from" />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time to</label>
             <div class="col-md-10">
-              <input id=""  class="form-control py-2" name="time_to"/>
+              <input  type="time" id=""  class="form-control py-2" name="time_to"/>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">is fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="fulled" />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="fulled" value="1" />
             </div>
           </div>
           
