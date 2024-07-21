@@ -26,11 +26,11 @@
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
         <form action="{{route('class.store')}}" method="POST" class="px-md-5">
-        @csrf
+          @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">class name</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="className" />
+              <input type="text" placeholder="Lola" class="form-control py-2" name="className" />
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -42,19 +42,19 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity</label>
             <div class="col-md-10">
-              <textarea id="" cols="30" rows="5" class="form-control py-2" name="capacity"></textarea>
+            <input type="number" placeholder="20" class="form-control py-2" name="capacity" /> 
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time from</label>
             <div class="col-md-10">
-              <textarea id="" cols="30" rows="5" class="form-control py-2" name="time_from"></textarea>
+              <input id="" class="form-control py-2" name="time_from" />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time to</label>
             <div class="col-md-10">
-              <textarea id="" cols="30" rows="5" class="form-control py-2" name="time_to"></textarea>
+              <input id=""  class="form-control py-2" name="time_to"/>
             </div>
           </div>
           <hr>
