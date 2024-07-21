@@ -31,12 +31,12 @@
     <div class="container my-5">
         <div class="py-5 px-md-5 px-1  rounded-1 mx-md-5" style="background-color: #fffffff2;">
             <h2 class="fw-bold fs-1 mb-3 pb-2 text-center">Contact Us</h2>
-            <form action="{{route('task3in')}}" method="get">
+            <form action="{{route('task3in')}}" method="post">
             @csrf
                 <div class="form-group mb-3 row">
                     <label for="" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
                     <div class="col-md-10">
-                        <input type="text" placeholder="e.g. Jhon Doe" class="form-control py-2" name="name" />
+                        <input type="text" placeholder="e.g. Jhon Doe" class="form-control py-2" name="name" id="data" />
                     </div>
                 </div>
                 <div class="form-group mb-3 row">
