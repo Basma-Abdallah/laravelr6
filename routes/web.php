@@ -161,5 +161,5 @@ Route::get('/', function () {
 Route::get('car/create', [CarController::class, 'create'])->name('cars.create');
 Route::post('cars', [CarController::class, 'store'])->name('cars.store');
 
-Route::get('class/create', [ClassController::class, 'create'])->name('class.create');
+Route::get('class/create', [ClassController::class, 'create']);
 Route::post('class', [ClassController::class, 'store'])->name('class.store');

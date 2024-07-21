@@ -51,7 +51,7 @@ class ClassController extends Controller
       
       Classes::create([
              'className' => $className,
-             'capacity'=>$capacity,
+             'capacity'=> $capacity,
              'price'=> $price,
              'is_fulled'=> $is_fulled,
              'timeFrom'=> $timeFrom,

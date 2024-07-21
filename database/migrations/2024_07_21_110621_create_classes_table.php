@@ -17,9 +17,8 @@ return new class extends Migration
             $table->integer('capacity');
             $table->float('price');
             $table->boolean('is_fulled');
-            $table->integer('timeFrom');
-            $table->integer('timeTo');
-            $table->timestamps();
+            $table->time('timeFrom', precision: 0);
+            $table->time('timeTo', precision: 0);
         });
     }
 
