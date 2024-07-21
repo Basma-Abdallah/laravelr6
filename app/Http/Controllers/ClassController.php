@@ -29,7 +29,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-      //  dd($request);
+       //dd($request);
     //   $className=$request->className;
     //   $price=$request->price;
     //   $capacity=$request->capacity;
@@ -60,6 +60,7 @@ class ClassController extends Controller
 
 
       return "data added";
+    
     }
 
     /**
