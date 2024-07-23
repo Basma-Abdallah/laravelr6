@@ -12,7 +12,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = Classes::get();
+        return view ('classes' , compact('classes'));
     }
 
     /**
@@ -33,7 +34,8 @@ class ClassController extends Controller
       $className=$request->className;
       $price=$request->price;
       $capacity=$request->capacity;
-      $is_fulled= $request->fulled;
+      //$is_fulled= $request->fulled;
+      $is_fulled= isset($request->fulled);
       $timeFrom= $request->time_from;
       $timeTo= $request->time_to;
 
@@ -44,11 +46,6 @@ class ClassController extends Controller
     //   $is_fulled= true;
     //   $timeFrom= 555;
     //   $timeTo= 5555;
-
-
-
-
-      
       Classes::create([
              'className' => $className,
              'capacity'=> $capacity,
@@ -76,7 +73,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class=classes::findOrfail($id);
+        return view('edit_class' ,compact('class'));
     }
 
     /**

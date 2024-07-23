@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Add Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -24,47 +23,45 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">Add class</h2>
-        <form action="{{route('class.store')}}" method="POST" class="px-md-5">
-          @csrf
+        <h2 class="fw-bold fs-2 mb-5 pb-2">edit Class</h2>
+        <form action="{{route('cars.store')}}" method="POST" class="px-md-5">
+        @csrf
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">class name</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Class name</label>
             <div class="col-md-10">
-              <input type="text" placeholder="Lola" class="form-control py-2" name="className" />
+              <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle" value="{{$class->className}}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
             <div class="col-md-10">
-              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price" />
+              <input type="number" step="0.1" placeholder="Enter price" class="form-control py-2" name="price"  value="{{$class->price}}"/>
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">capacity</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Capacity:</label>
             <div class="col-md-10">
-            <input type="number" placeholder="20" class="form-control py-2" name="capacity" /> 
+            <input type="number"  class="form-control py-2"  value="{{$class->capacity}}" name="Capacity"/>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">is full</label>
+            <div class="col-md-10">
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" @checked($class->is_fulled)/>
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time from</label>
             <div class="col-md-10">
-              <input  type="time" id="" class="form-control py-2" name="time_from" />
+              <input  type="time" id="" class="form-control py-2" name="time_from"   value="{{$class->timeFrom}}" />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time to</label>
             <div class="col-md-10">
-              <input  type="time" id=""  class="form-control py-2" name="time_to"/>
+              <input  type="time" id=""  class="form-control py-2" name="time_to"  value="{{$class->timeTo}}"/>
             </div>
-          </div>
-          <hr>
-          <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">is fulled:</label>
-            <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="fulled" value="1" />
-            </div>
-          </div>
-          
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
               Add Car

@@ -3,6 +3,7 @@
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
@@ -163,3 +164,11 @@ Route::post('cars', [CarController::class, 'store'])->name('cars.store');
 
 Route::get('class/create', [ClassController::class, 'create']);
 Route::post('class', [ClassController::class, 'store'])->name('class.store');
+
+
+Route::get('cars', [CarController::class, 'index']);
+
+Route::get('cars/{id}', [CarController::class, 'edit'])->name('car.edit');
+
+Route::get('classes', [ClassController::class, 'index']);
+Route::get('classes/{id}', [ClassController::class, 'edit'])->name('class.edit');

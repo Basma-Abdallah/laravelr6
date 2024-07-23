@@ -23,25 +23,29 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All classes</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car Title</th>
+              <th scope="col">class Name</th>
               <th scope="col">Price</th>
-              <th scope="col">Description</th>
-              <th scope="col">Published</th>
-              <th scope="col">edit</th>
+              <th scope="col">capacity</th>
+              <th scope="col">is fulled</th>
+              <th scope="col">time From</th>
+              <th scope="col">time To</th>
+              <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($cars as $car)
+            @foreach ($classes as $class)
             <tr>
-              <td scope="row">{{$car['carTitle']}}</td>
-              <td>{{$car['price']}}</td>
-              <td>{{ \Illuminate\Support\Str::limit($car['description'], 10, $end='.....') }}</td>
-              <td>{{ $car['published'] == "1" ? "yes" : "No" }}</td>
-              <td><a href="{{route('car.edit' , $car['id'])}}">edit</a></td>
+              <td scope="row">{{$class['className']}}</td>
+              <td>{{$class['price']}}</td>
+              <td>{{ \Illuminate\Support\Str::limit($class['capacity'], 10, $end='.....') }}</td>
+              <td>{{ $class['is_fulled'] == "1" ? "yes" : "No" }}</td>
+              <td>{{$class['timeFrom']}}</td>
+              <td>{{$class['timeTo']}}</td>
+              <td><a href="{{route('class.edit' , $class['id'])}}">edit</a></td>
             </tr>
             @endforeach
           </tbody>
