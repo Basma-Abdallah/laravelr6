@@ -158,17 +158,25 @@ Route::get('/', function () {
 // Route::get('login' , [ExampleController::class ,'login']);
 // Route::post('logindone',[ExampleController::class , 'logincheck'] )->name('logindone');
 
+//***********************************************************************************//
 
 Route::get('car/create', [CarController::class, 'create'])->name('cars.create');
 Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+Route::get('cars', [CarController::class, 'index'])->name('car.index');
+Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
+Route::get('cars/{id}', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);;
+Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('car.destroy');
+Route::put('cars/{id}', [CarController::class, 'update'])->name('car.update');
+Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
 
-Route::get('class/create', [ClassController::class, 'create']);
-Route::post('class', [ClassController::class, 'store'])->name('class.store');
 
 
-Route::get('cars', [CarController::class, 'index']);
-
-Route::get('cars/{id}', [CarController::class, 'edit'])->name('car.edit');
-
-Route::get('classes', [ClassController::class, 'index']);
-Route::get('classes/{id}', [ClassController::class, 'edit'])->name('class.edit');
+Route::get('class/create', [ClassController::class, 'create'])->name('car.create');
+Route::post('classes', [ClassController::class, 'store'])->name('class.store');
+Route::get('classes', [ClassController::class, 'index'])->name('class.index');
+Route::get('class/{id}/edit', [ClassController::class, 'edit'])->name('class.edit');
+Route::get('class/{id}', [ClassController::class, 'show'])->name('class.show')->where([ 'id' => '[0-9]+']);
+Route::get('class/{id}/delete', [ClassController::class, 'destroy'])->name('class.destroy');
+Route::delete("delete", [ClassController::class,"destroy"])->name('deleteClient');
+Route::put('class/{id}', [ClassController::class, 'update'])->name('class.update');
+Route::get('class/trashed', [ClassController::class, 'showDeleted'])->name('class.showDeleted');
