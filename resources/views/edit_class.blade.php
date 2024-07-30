@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>Edit Class</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,26 +42,26 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Capacity:</label>
             <div class="col-md-10">
-            <input type="number"  class="form-control py-2"   name="Capacity" value="{{$class->capacity}}"/>
+            <input type="number"  class="form-control py-2"   name="capacity" value="{{$class->capacity}}"/>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">is full</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="fulled" @checked($class->is_fulled) />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="is_fulled" @checked($class->is_fulled) />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time from</label>
             <div class="col-md-10">
-              <input  type="time" id="" class="form-control py-2" name="time_from"   value="{{$class->timeFrom}}" />
+              <input  type="time" id="" class="form-control py-2"   value="{{$class->timeFrom}}" name="timeFrom"  />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time to</label>
             <div class="col-md-10">
-              <input  type="time" id=""  class="form-control py-2" name="time_to"  value="{{$class->timeTo}}"/>
+              <input  type="time" id=""  class="form-control py-2"   value="{{$class->timeTo}}" name="timeTo"/>
             </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">

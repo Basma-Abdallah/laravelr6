@@ -164,11 +164,12 @@ Route::get('car/create', [CarController::class, 'create'])->name('cars.create');
 Route::post('cars', [CarController::class, 'store'])->name('cars.store');
 Route::get('cars', [CarController::class, 'index'])->name('car.index');
 Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
-Route::get('cars/{id}', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);;
+Route::get('cars/{id}/show', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);
 Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('car.destroy');
 Route::put('cars/{id}', [CarController::class, 'update'])->name('car.update');
 Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
-
+Route::delete('cars/{id}', [CarController::class, 'forceDelete'])->name('car.Delete');
+Route::patch('cars/{id}', [CarController::class, 'restore'])->name('car.restore');
 
 
 Route::get('class/create', [ClassController::class, 'create'])->name('car.create');
@@ -180,3 +181,5 @@ Route::get('class/{id}/delete', [ClassController::class, 'destroy'])->name('clas
 Route::delete("delete", [ClassController::class,"destroy"])->name('deleteClient');
 Route::put('class/{id}', [ClassController::class, 'update'])->name('class.update');
 Route::get('class/trashed', [ClassController::class, 'showDeleted'])->name('class.showDeleted');
+Route::delete('class/{id}', [ClassController::class, 'forceDelete'])->name('class.Delete');
+Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.restore');

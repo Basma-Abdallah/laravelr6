@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Add Car</title>
+  <title>Add CLASS</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,20 +48,20 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time from</label>
             <div class="col-md-10">
-              <input  type="time" id="" class="form-control py-2" name="time_from" />
+              <input  type="time"  id="" class="form-control py-2" name="timeFrom" />
             </div>
           </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">time to</label>
             <div class="col-md-10">
-              <input  type="time" id=""  class="form-control py-2" name="time_to"/>
+              <input  type="time"    id=""  class="form-control py-2" name="timeTo"/>
             </div>
           </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">is fulled:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="fulled" value="1" />
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="is_fulled" value="1" />
             </div>
           </div>
           

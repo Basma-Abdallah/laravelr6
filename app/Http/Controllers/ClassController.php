@@ -30,34 +30,42 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-       //dd($request);
-      $className=$request->className;
-      $price=$request->price;
-      $capacity=$request->capacity;
-      //$is_fulled= $request->fulled;
-      $is_fulled= isset($request->fulled);
-      $timeFrom= $request->time_from;
-      $timeTo= $request->time_to;
+        //dd($request);
+        //   $className=$request->className;
+        //   $price=$request->price;
+        //   $capacity=$request->capacity;
+        //   //$is_fulled= $request->fulled;
+        //   $is_fulled= isset($request->fulled);
+        //   $timeFrom= $request->time_from;
+        //   $timeTo= $request->time_to;
 
+      $data= $request->validate([
+        'className'=>'required|string',
+         'capacity'=>'required|numeric|min:2|max:25',
+         'price'=>'required|decimal:0,2',
+         'timeFrom'=>'required|date_format:H:i',
+         'timeTo'=>'required|date_format:H:i'
+    
+        ]);
+        $data['is_fulled']=isset($request->is_fulled);
 
+       //dd($data);
+       Classes::create($data);
+        return redirect()->route('class.index');
     //   $className="test";
     //   $price=22;
     //   $capacity=33;
     //   $is_fulled= true;
     //   $timeFrom= 555;
     //   $timeTo= 5555;
-      Classes::create([
-             'className' => $className,
-             'capacity'=> $capacity,
-             'price'=> $price,
-             'is_fulled'=> $is_fulled,
-             'timeFrom'=> $timeFrom,
-             'timeTo'=> $timeTo
-      ] );
-
-
-      return redirect()->route('class.index');
-    
+    //   Classes::create([
+    //          'className' => $className,
+    //          'capacity'=> $capacity,
+    //          'price'=> $price,
+    //          'is_fulled'=> $is_fulled,
+    //          'timeFrom'=> $timeFrom,
+    //          'timeTo'=> $timeTo
+    //   ] ); 
     }
 
     /**
@@ -83,24 +91,39 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //dd($request , $id);
         //dd($request);
-      $className=$request->className;
-      $price=$request->price;
-      $capacity=$request->Capacity;
-      //$is_fulled= $request->fulled;
-      $is_fulled= isset($request->fulled);
-      $timeFrom= $request->time_from;
-      $timeTo= $request->time_to;
-      $data =([
-        'className'=>$className,
-        'capacity'=>$capacity,
-        'price'=>$price,
-        'is_fulled'=>$is_fulled,
-        'timeFrom'=>$timeFrom,
-        'timeTo'=>$timeTo
+        //       $className=$request->className;
+        //       $price=$request->price;
+        //       $capacity=$request->capacity;
+        //       //$is_fulled= $request->fulled;
+        //       $is_fulled= isset($request->is_fulled);
+        //       $timeFrom= $request->timeFrom;
+        //       $timeTo= $request->timeTo;
+        //       $data =([
+        //         'className'=>$className,
+        //         'capacity'=>$capacity,
+        //         'price'=>$price,
+        //         'is_fulled'=>$is_fulled,
+        //         'timeFrom'=>$timeFrom,
+        //         'timeTo'=>$timeTo
 
- ] );
+        //  ] );
 
+        $data= $request->validate([
+
+            'className'=>'string',
+             'capacity'=>'numeric|min:2|max:25',
+             'price'=>'decimal:0,2',
+             'strtotime($class->timeFrom)'=>'date_format:H:i',
+             'strtotime($class->timeTo)'=>'date_format:H:i|after:start_time'
+        
+            ]);
+           
+            $data['is_fulled']=isset($request->is_fulled);
+    
+        // dd($data);
+          
         Classes::where('id' ,$id)->update($data);
         return redirect()->route('class.index');
             }
@@ -113,5 +136,23 @@ class ClassController extends Controller
     $id = $request->id;
     Classes::where('id', $id)->delete();
     return redirect('classes');
+    }
+
+    public function showDeleted()
+    {
+       $classes= Classes::onlyTrashed()->get();
+        return view ('trashedClasses' , compact('classes'));
+    }
+    public function restore (string $id)
+    {
+        Classes::where('id' , $id)->restore();
+        return redirect()->route('class.showDeleted');
+    }
+    public function forceDelete (string $id)
+    {
+        //Car::where('id' , $id)->forceDelete();
+        $classes = Classes::onlyTrashed()->find($id);
+        $classes->forceDelete();
+        return redirect()->route('class.index');
     }
 }

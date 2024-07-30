@@ -45,7 +45,7 @@
               <td>{{ $car['published'] == "1" ? "yes" : "No" }}</td>
               <td><a href="{{route('car.edit' , $car['id'])}}">edit</a></td>
               <td><a href="{{route('car.show' , $car['id'])}}">show</a></td>
-              <td><a href="{{route('car.destroy' , $car['id'])}}" onclick="confirm('Are you sure you want to delete?')" >delete</a></td>
+              <td><a href="{{route('car.destroy' , $car['id'])}}" onclick=" return confirm('Are you sure you want to delete?')" >delete</a></td>
             </tr>
             @endforeach
           </tbody>

@@ -45,8 +45,8 @@
               <td>{{$class['price']}}</td>
               <td>{{ \Illuminate\Support\Str::limit($class['capacity'], 10, $end='.....') }}</td>
               <td>{{ $class['is_fulled'] == "1" ? "yes" : "No" }}</td>
-              <td>{{$class['timeFrom']}}</td>
-              <td>{{$class['timeTo']}}</td>
+              <td>{{ date('h:i A', strtotime($class->timeFrom)) }}</td>
+              <td>{{ date('h:i A', strtotime($class->timeTo)) }}</td>
               <td><a href="{{route('class.edit',$class['id'])}}">edit</a></td>
               <td><a href="{{route('class.show',$class['id'])}}">show</a></td>
               <td>
