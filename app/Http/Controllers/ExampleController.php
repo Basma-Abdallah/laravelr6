@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests ;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
 class ExampleController extends Controller
 {
     function login()
     {
-
-
         return  view ('login');
     }
     function logincheck(){
@@ -26,10 +28,9 @@ class ExampleController extends Controller
 
         return  view ('task3');
     }
-    function task3go()
+    function task3go(Request $request)
     {
-
-
-        return  view ('task3go');
+        
+        return $request->name .'<br>'. $request->email.'<br>'. $request->subject.'<br>'. $request->messege ;
     }
 }
