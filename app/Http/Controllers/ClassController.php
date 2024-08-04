@@ -109,16 +109,21 @@ class ClassController extends Controller
         //         'timeTo'=>$timeTo
 
         //  ] );
+        $message=[
+       'title.required'=>'Title is required',
 
+
+
+        ];
         $data= $request->validate([
 
             'className'=>'string',
              'capacity'=>'numeric|min:2|max:25',
              'price'=>'decimal:0,2',
              'strtotime($class->timeFrom)'=>'date_format:H:i',
-             'strtotime($class->timeTo)'=>'date_format:H:i|after:start_time'
+             'strtotime($class->timeTo)'=>'date_format:H:i|after:timeFrom'
         
-            ]);
+            ],$message);
            
             $data['is_fulled']=isset($request->is_fulled);
     
