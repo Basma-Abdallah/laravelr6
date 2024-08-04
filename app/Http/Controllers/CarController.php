@@ -36,16 +36,38 @@ class CarController extends Controller
     public function store(Request $request)
     {
 
+        
+       
+
+       
         //vaidation of data
+        $message=[
+            'carTitle.string'=>' car Title is string',
+            'carTitle.required'=>' car Title is required',
+            'description.required'=>' car description is required',
+            'description.max'=>' car description max is 100 words',
+            'price.decimal'=>' car price in decimel max is 100 words',
+            'image.required'=>' car image is required',
+            'image.mimes'=>' car image not supported',
+             ];
 
         $data= $request->validate([
         'carTitle'=>'required|string',
          'description'=>'required|string|max:300',
          'price'=>'required|decimal:0,2',
+         'image' =>'required|mimes:png,jpg,jpeg'
+        
 
-        ]);
+        ] , $message);
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+        $data['image']= $file_name;
         $data['published']=isset($request->published);
-
+        $data['image']= $file_name;
+        $data['imagePath']= $path;
+        
         //dd($data);
         Car::create($data);
         return redirect()->route('car.index');
@@ -79,6 +101,7 @@ class CarController extends Controller
         $car=Car::findOrfail($id);
 
        //dd( $car->toSql());
+      // dd($car);
         return view('car_details' ,compact('car'));
     }
 
@@ -107,13 +130,19 @@ class CarController extends Controller
         //        'description'=> $descrition,
         //        'published'=> $published
         // ];
+        $message=[
+            'carTitle.string'=>' car Title is required',
+            'description.string'=>' car description is string',
+            'description.max'=>' car description max is 100 words',
+            'price.decimal'=>' car price in decimel max is 100 words',
+             ];
             $data= $request->validate([
 
                     'carTitle'=>'string',
                     'description'=>'string|max:300',
                     'price'=>'decimal:0,2',
     
-            ]);
+            ] , $message);
            $data['published']=isset($request->published);
             Car::where('id' ,$id)->update($data);
             return redirect()->route('car.index');

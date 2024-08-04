@@ -172,6 +172,7 @@ Route::delete('cars/{id}', [CarController::class, 'forceDelete'])->name('car.Del
 Route::patch('cars/{id}', [CarController::class, 'restore'])->name('car.restore');
 
 
+
 Route::get('class/create', [ClassController::class, 'create'])->name('car.create');
 Route::post('classes', [ClassController::class, 'store'])->name('class.store');
 Route::get('classes', [ClassController::class, 'index'])->name('class.index');
@@ -183,3 +184,8 @@ Route::put('class/{id}', [ClassController::class, 'update'])->name('class.update
 Route::get('class/trashed', [ClassController::class, 'showDeleted'])->name('class.showDeleted');
 Route::delete('class/{id}', [ClassController::class, 'forceDelete'])->name('class.Delete');
 Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.restore');
+
+
+
+Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
