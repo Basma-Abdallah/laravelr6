@@ -119,6 +119,7 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         //  dd($request , $id);
         // $carTitle=$request->carTitle;
         // $price=$request->price;
@@ -130,21 +131,46 @@ class CarController extends Controller
         //        'description'=> $descrition,
         //        'published'=> $published
         // ];
+            $car = Car::findOrFail($id);
+            $tempImage = $car['image'];
+
+        
+    
         $message=[
             'carTitle.string'=>' car Title is required',
             'description.string'=>' car description is string',
             'description.max'=>' car description max is 100 words',
             'price.decimal'=>' car price in decimel max is 100 words',
+            'image.required'=>' car image is required',
+            'image.mimes'=>' car image not supported',
              ];
             $data= $request->validate([
 
                     'carTitle'=>'string',
                     'description'=>'string|max:300',
                     'price'=>'decimal:0,2',
+                    'image' =>'mimes:png,jpg,jpeg'
     
             ] , $message);
+
+            
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $file_name = time() . '.' . $image->getClientOriginalExtension();
+                $path = 'assets/images';
+                $request->image->move($path, $file_name);
+                
+               
+                
+        
+                // Update the image path in the database
+                $car->image = $file_name;
+               
+            }
+            //$car->save();
            $data['published']=isset($request->published);
-            Car::where('id' ,$id)->update($data);
+           $data['image']= $file_name;
+           Car::where('id' ,$id)->update($data);
             return redirect()->route('car.index');
         //dd($data);
             
