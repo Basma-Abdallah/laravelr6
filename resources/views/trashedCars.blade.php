@@ -44,7 +44,7 @@
               <td>{{ \Illuminate\Support\Str::limit($car['description'], 10, $end='.....') }}</td>
               <td>{{ $car['published'] == "1" ? "yes" : "No" }}</td>
               <td>
-                <form action="{{route('car.restore', $car['id'])}}" method="post">
+                <form action="{{route('cars.restore', $car['id'])}}" method="post">
                   @csrf
                   @method('patch')
                   <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
@@ -52,9 +52,9 @@
 
                 </form>
               </td>
-              <td><a href="{{route('car.show' , $car['id'])}}">show</a></td>
+              <td><a href="{{route('cars.show' , $car['id'])}}">show</a></td>
               <td>
-              <form action="{{route('car.Delete', $car['id'])}}" method="post">
+              <form action="{{route('cars.Delete', $car['id'])}}" method="post">
                   @csrf
                   @method('delete')
                   <button type="submit" class="btn btn-link m-0 p-0">permenent Delete</button>
