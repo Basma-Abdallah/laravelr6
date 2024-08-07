@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
-
-
-
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -160,20 +158,52 @@ Route::get('/', function () {
 
 //***********************************************************************************//
 
-Route::get('car/create', [CarController::class, 'create'])->name('cars.create');
-Route::post('cars', [CarController::class, 'store'])->name('cars.store');
-Route::get('cars', [CarController::class, 'index'])->name('car.index');
-Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
-Route::get('cars/{id}/show', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);
-Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('car.destroy');
-Route::put('cars/{id}', [CarController::class, 'update'])->name('car.update');
-Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
-Route::delete('cars/{id}', [CarController::class, 'forceDelete'])->name('car.Delete');
-Route::patch('cars/{id}', [CarController::class, 'restore'])->name('car.restore');
+// Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+// Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+// Route::get('cars', [CarController::class, 'index'])->name('car.index');
+// Route::get('cars/{id}/edit', [CarController::class, 'edit'])->name('car.edit');
+// Route::get('cars/{id}/show', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);
+// Route::get('cars/{id}/delete', [CarController::class, 'destroy'])->name('car.destroy');
+// Route::put('cars/{id}', [CarController::class, 'update'])->name('car.update');
+// Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
+// Route::delete('cars/{id}', [CarController::class, 'forceDelete'])->name('car.Delete');
+// Route::patch('cars/{id}', [CarController::class, 'restore'])->name('car.restore');
+
+// Route::prefix('cars')->group(function(){
+//     Route::prefix('{id}')->group(function(){
+
+//         Route::put('', [CarController::class, 'update'])->name('car.update');
+//         Route::delete('', [CarController::class, 'forceDelete'])->name('car.Delete');
+//         Route::patch('', [CarController::class, 'restore'])->name('car.restore');
+//         Route::get('edit', [CarController::class, 'edit'])->name('car.edit');
+//         Route::get('show', [CarController::class, 'show'])->name('car.show')->where([ 'id' => '[0-9]+']);
+//         Route::get('delete', [CarController::class, 'destroy'])->name('car.destroy');
+//     });
+//     Route::get('create', [CarController::class, 'create'])->name('cars.create');
+//     Route::post('', [CarController::class, 'store'])->name('cars.store');
+//     Route::get('', [CarController::class, 'index'])->name('car.index');
+//     Route::get('trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
+// });
+Route::controller(CarController::class)->as('cars.')->group(function() {
+    Route::prefix('cars')->group(function(){
+        Route::prefix('{id}')->group(function(){
+            Route::put('',  'update')->name('update');
+            Route::delete('',  'forceDelete')->name('Delete');
+            Route::patch('',  'restore')->name('restore');
+            Route::get('edit',  'edit')->name('edit');
+            Route::get('show',  'show')->name('show');
+            Route::get('delete',  'destroy')->name('destroy');
+        });
+        Route::get('create',  'create')->name('create');
+        Route::post('',  'store')->name('store');
+        Route::get('',  'index')->name('index');
+        Route::get('trashed',  'showDeleted')->name('showDeleted');
+    });
+    
+});
 
 
-
-Route::get('class/create', [ClassController::class, 'create'])->name('car.create');
+Route::get('classes/create', [ClassController::class, 'create'])->name('car.create');
 Route::post('classes', [ClassController::class, 'store'])->name('class.store');
 Route::get('classes', [ClassController::class, 'index'])->name('class.index');
 Route::get('class/{id}/edit', [ClassController::class, 'edit'])->name('class.edit');
@@ -189,3 +219,12 @@ Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.res
 
 Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
+Route::post('insert', [ExampleController::class, 'insert'])->name('insertnumber');
+Route::get('index', [ExampleController::class, 'index']);
+
+
+
+Route::get('index', [ProductController::class, 'index'])->name('product.index');
+Route::get('product/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('products', [ProductController::class, 'store'])->name('products.store');
+

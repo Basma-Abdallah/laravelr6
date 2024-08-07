@@ -44,5 +44,11 @@ class ExampleController extends Controller
         $request->image->move($path, $file_name);
         return 'Uploaded';
         }
-        
+        function insert(Request $request){
+            
+        }
+        function index()
+    {
+        return  view ('fashion-index');
+    }
 }

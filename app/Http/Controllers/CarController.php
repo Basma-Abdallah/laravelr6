@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Traits\Common;
 
 
 class CarController extends Controller
@@ -11,6 +12,8 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     use Common;
     public function index()
     {
         //get all cars from db 
@@ -59,18 +62,16 @@ class CarController extends Controller
         
 
         ] , $message);
-        $file_extension = $request->image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $path = 'assets/images';
-        $request->image->move($path, $file_name);
-        $data['image']= $file_name;
+        // $file_extension = $request->image->getClientOriginalExtension();
+        // $file_name = time() . '.' . $file_extension;
+        // $path = 'assets/images';
+        // $request->image->move($path, $file_name);
+        // $data['image']= $file_name;
         $data['published']=isset($request->published);
-        $data['image']= $file_name;
-        $data['imagePath']= $path;
-        
+        $data['image']= $this->uploadFile($request->image , 'assets/images');
         //dd($data);
         Car::create($data);
-        return redirect()->route('car.index');
+        return redirect()->route('cars.index');
         
         // $carTitle=$request->carTitle;
         // $price=$request->price;
@@ -152,26 +153,10 @@ class CarController extends Controller
                     'image' =>'mimes:png,jpg,jpeg'
     
             ] , $message);
-
-            
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $file_name = time() . '.' . $image->getClientOriginalExtension();
-                $path = 'assets/images';
-                $request->image->move($path, $file_name);
-                
-               
-                
-        
-                // Update the image path in the database
-                $car->image = $file_name;
-               
-            }
-            //$car->save();
            $data['published']=isset($request->published);
-           $data['image']= $file_name;
+           
            Car::where('id' ,$id)->update($data);
-            return redirect()->route('car.index');
+            return redirect()->route('cars.index');
         //dd($data);
             
     }
@@ -182,7 +167,7 @@ class CarController extends Controller
     public function destroy(string $id)
     {
         Car::where('id' , $id)->delete();
-        return redirect()->route('car.index');
+        return redirect()->route('cars.index');
     }
     public function showDeleted()
     {
@@ -192,14 +177,14 @@ class CarController extends Controller
     public function restore (string $id)
     {
         Car::where('id' , $id)->restore();
-        return redirect()->route('car.showDeleted');
+        return redirect()->route('cars.showDeleted');
     }
     public function forceDelete (string $id)
     {
         //Car::where('id' , $id)->forceDelete();
         $cars = Car::onlyTrashed()->find($id);
         $cars->forceDelete();
-        return redirect()->route('car.index');
+        return redirect()->route('cars.index');
     }
     
 }
