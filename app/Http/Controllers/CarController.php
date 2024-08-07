@@ -120,6 +120,7 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         //  dd($request , $id);
         // $carTitle=$request->carTitle;
         // $price=$request->price;
@@ -152,19 +153,6 @@ class CarController extends Controller
                     'image' =>'mimes:png,jpg,jpeg'
     
             ] , $message);
-
-            
-            if ($request->hasFile('image')) {
-                // $image = $request->file('image');
-                // $file_name = time() . '.' . $image->getClientOriginalExtension();
-                // $path = 'assets/images';
-                // $request->image->move($path, $file_name);
-               $data['image']= $this->uploadFile($request->image , 'assets/images');
-               // Update the image path in the database
-               // $car->image = $file_name;  
-            }
-            
-            //$car->save();
            $data['published']=isset($request->published);
            
            Car::where('id' ,$id)->update($data);
