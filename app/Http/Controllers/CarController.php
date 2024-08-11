@@ -68,7 +68,7 @@ class CarController extends Controller
         // $request->image->move($path, $file_name);
         // $data['image']= $file_name;
         $data['published']=isset($request->published);
-        $data['image']= $this->uploadFile($request->image , 'assets/images');
+        $data['image']= $this->uploadFile($request->image , 'assets/images/cars');
         //dd($data);
         Car::create($data);
         return redirect()->route('cars.index');

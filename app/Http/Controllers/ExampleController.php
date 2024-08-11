@@ -51,4 +51,8 @@ class ExampleController extends Controller
     {
         return  view ('fashion-index');
     }
+    function about()
+    {
+        return  view ('about');
+    }
 }

@@ -221,10 +221,13 @@ Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 Route::post('insert', [ExampleController::class, 'insert'])->name('insertnumber');
 Route::get('index', [ExampleController::class, 'index']);
+Route::get('about', [ExampleController::class, 'about']);
 
 
 
 Route::get('index', [ProductController::class, 'index'])->name('product.index');
 Route::get('product/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('products', [ProductController::class, 'store'])->name('products.store');
+Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
 
