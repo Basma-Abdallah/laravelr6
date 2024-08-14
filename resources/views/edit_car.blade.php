@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>edit Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,7 @@
           </div>
           <hr>
           <div class="col-lg-4 col-md-6 col-10 position-relative ">
-              <img src="{{ asset('assets/images/' . $car->image)  }}" alt="{{$car->carTitle}}" class="card-img"
+              <img src="{{ asset('assets/images/cars/' . $car->image)  }}" alt="{{$car->carTitle}}" class="card-img"
                 style="position: relative; margin: 50px; top: 50%; transform: translateY(10%) translateX(100%); width: 70%;height: 70%; " />
           </div>
           <div class="form-group mb-3 row">
@@ -71,6 +71,20 @@
           </div>
           </div>
          <hr>
+         <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <div class="col-md-10">
+              <select name="category_id" id="" class="form-control">
+                <option value="">Select Category</option>
+              @foreach($categories as $category)
+                <option value="{{$category->id}}" @selected($car->category_id  == $category->id) >{{$category->category_name}}</option>
+              @endforeach
+              </select>
+              @error('price')
+                <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">

@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Traits\Common;
 
+
 class ProductController extends Controller
 {
     
@@ -54,7 +55,7 @@ class ProductController extends Controller
         ] , $message);
         
         $data['published']=isset($request->published);
-        $data['image']= $this->uploadFile($request->image ,'assets/images');
+        $data['image']= $this->uploadFile($request->image ,'assets/images/product');
         //dd($data);
         Product::create($data);
         return redirect()->route('products.create');
@@ -80,7 +81,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product=Product::findOrfail($id);
+      return view('edit_product' ,compact('product'));
     }
 
     /**
@@ -88,7 +90,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+       
+        
+        //dd($request);
+
+    $message=[
+        'ProductName.string'=>' car Title is required',
+        'description.string'=>' car description is string',
+        'description.max'=>' car description max is 100 words',
+        'price.decimal'=>' car price in decimel max is 100 words',
+        'image.required'=>' car image is required',
+        'image.mimes'=>' car image not supported',
+         ];
+      
+         $data= $request->validate([
+
+                'ProductName'=>'string',
+                'description'=>'string|max:300',
+                'price'=>'decimal:0,2',
+                'image' =>'mimes:png,jpg,jpeg',
+                                   ] , $message);
+       $data['published']=isset($request->published);
+       $data['image']= $this->uploadFile($request->image ,'assets/images/product');
+     
+       Product::where('id' ,$id)->update($data);
+        return redirect()->route('product.index');
     }
 
     /**
