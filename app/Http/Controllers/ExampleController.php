@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests ;
+use App\Models\Phone;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
+
+
 
 class ExampleController extends Controller
 {
@@ -54,5 +59,17 @@ class ExampleController extends Controller
     function about()
     {
         return  view ('about');
+    }
+    public function test() {
+       // dd(Student::find(1));
+       //dd(Student::find(3)?->phone->phone_number);
+      // dd(Student::find(3),Student::find(1)->phone);
+
+        dd(
+            DB::table('students')
+            ->join('phones', 'phones.id', '=', 'students.phone_id')
+            ->where('students.id', '=', 1)
+            ->first()
+        );
     }
 }

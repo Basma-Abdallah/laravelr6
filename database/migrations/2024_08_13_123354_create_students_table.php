@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -12,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('carTitle',100);
-            $table->text('description');
-            $table->float('price');
-            $table->boolean('published');
-            $table->softDeletes();
-            $table->string('image');
+            $table->string('name');
+            $table->string('class');
+            $table->string('address');
+            $table->foreignId('phone_id')->constrained('phones');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('students');
     }
 };

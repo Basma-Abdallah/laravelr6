@@ -14,6 +14,14 @@ class CarFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     
+     private function generateRandomImage($path)
+     {
+         $files = scandir($path);
+         $files = array_diff($files, array('.', '..'));
+         return fake()->randomElement($files);
+     }
     public function definition(): array
     {
         return [
@@ -22,6 +30,7 @@ class CarFactory extends Factory
             'price'=>fake()->randomFloat(2),
             'published'=>fake()->numberBetween(1,0),
             'image'=>basename(fake()->image(public_path('assets/images/cars'))),
+            'category_id' => fake()->numberBetween(1,2),
         ];
     }
 }

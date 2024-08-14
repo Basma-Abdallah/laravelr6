@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 
 
@@ -30,7 +31,9 @@ class CarController extends Controller
      */
     public function create()
     {
-       return view('add_cars');
+       //return view('add_cars');
+       $categories = Category::select('id', 'category_name')->get();
+       return view('add_cars', compact('categories'));
     }
 
     /**
@@ -39,10 +42,6 @@ class CarController extends Controller
     public function store(Request $request)
     {
 
-        
-       
-
-       
         //vaidation of data
         $message=[
             'carTitle.string'=>' car Title is string',
@@ -52,13 +51,15 @@ class CarController extends Controller
             'price.decimal'=>' car price in decimel max is 100 words',
             'image.required'=>' car image is required',
             'image.mimes'=>' car image not supported',
+            'category_id.required'=>'cat is required'
              ];
 
         $data= $request->validate([
         'carTitle'=>'required|string',
          'description'=>'required|string|max:300',
          'price'=>'required|decimal:0,2',
-         'image' =>'required|mimes:png,jpg,jpeg'
+         'image' =>'required|mimes:png,jpg,jpeg',
+         'category_id'=>'required'
         
 
         ] , $message);
@@ -70,7 +71,17 @@ class CarController extends Controller
         $data['published']=isset($request->published);
         $data['image']= $this->uploadFile($request->image , 'assets/images/cars');
         //dd($data);
-        Car::create($data);
+         Car::create($data);
+        // Create the profile associated with the user
+       // $Category = new Category([
+       // 'catgeory_name' => $data['category'],
+        //'id' => $data['category'],
+
+        
+    //]);
+
+    // Associate the profile with the user
+      //  $CarData->profile()->save($Category);
         return redirect()->route('cars.index');
         
         // $carTitle=$request->carTitle;
@@ -112,7 +123,8 @@ class CarController extends Controller
     public function edit(string $id)
     {
       $car=Car::findOrfail($id);
-      return view('edit_car' ,compact('car'));
+      $categories = Category::select('id', 'category_name')->get();
+      return view('edit_car' ,compact('car' ,'categories'));
     }
 
     /**
@@ -144,13 +156,15 @@ class CarController extends Controller
             'price.decimal'=>' car price in decimel max is 100 words',
             'image.required'=>' car image is required',
             'image.mimes'=>' car image not supported',
+            'category_id.required'=>'cat is required'
              ];
             $data= $request->validate([
 
                     'carTitle'=>'string',
                     'description'=>'string|max:300',
                     'price'=>'decimal:0,2',
-                    'image' =>'mimes:png,jpg,jpeg'
+                    'image' =>'mimes:png,jpg,jpeg',
+                    'category_id'=>'required'
     
             ] , $message);
            $data['published']=isset($request->published);

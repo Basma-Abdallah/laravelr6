@@ -71,6 +71,20 @@
           </div>
           </div>
          <hr>
+         <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <div class="col-md-10">
+              <select name="category_id" id="" class="form-control">
+                <option value="">Select Category</option>
+              @foreach($categories as $category)
+                <option value="{{$category->id}}" @selected($car->category_id  == $category->id) >{{$category->category_name}}</option>
+              @endforeach
+              </select>
+              @error('price')
+                <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
