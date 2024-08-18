@@ -110,11 +110,13 @@ class CarController extends Controller
     public function show(string $id)
     {
         //dd(Car::find($id)->toSql());
-        $car=Car::findOrfail($id);
-
+        $car=Car::with('category')->findOrfail($id);
+        // $car=Car::findOrfail($id);
+        // $categories = Category::select('id', 'category_name')->get();
        //dd( $car->toSql());
       // dd($car);
         return view('car_details' ,compact('car'));
+      //  return view('car_details' ,compact('car','categories'));
     }
 
     /**
@@ -164,12 +166,12 @@ class CarController extends Controller
                     'description'=>'string|max:300',
                     'price'=>'decimal:0,2',
                     'image' =>'mimes:png,jpg,jpeg',
-                    'category_id'=>'required'
+                    'category_id'=>'required|numeric|exists:categories,id'
     
             ] , $message);
+            
+            Car::where('id' ,$id)->update($data);
            $data['published']=isset($request->published);
-           
-           Car::where('id' ,$id)->update($data);
             return redirect()->route('cars.index');
         //dd($data);
             

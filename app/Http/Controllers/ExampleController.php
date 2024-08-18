@@ -72,4 +72,15 @@ class ExampleController extends Controller
             ->first()
         );
     }
+    function task12()
+    {
+
+
+        return  view ('task12');
+    }
+    function task12go(Request $request)
+    {
+        
+        return $request->name .'<br>'. $request->email.'<br>'. $request->subject.'<br>'. $request->messege ;
+    }
 }

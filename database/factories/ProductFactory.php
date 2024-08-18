@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'description'=>fake()->text(),
             'price'=>fake()->randomFloat(2),
             'published'=>fake()->numberBetween(1,0),
-            'image'=>basename(fake()->image(public_path('assets/images/products'))),
+            'image'=>basename(fake()->image(public_path('assets/images/product'))),
 
 
         ];
