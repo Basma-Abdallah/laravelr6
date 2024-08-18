@@ -8,6 +8,7 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -134,9 +135,7 @@ Route::get('/', function () {
 
 
 // });
-// Route::get('/cv' ,  [ExampleController::class ,'cv']);
-// Route::get('/task3' ,  [ExampleController::class ,'task3']);
-// Route::post('/task3go' ,  [ExampleController::class ,'task3go'])->name('task3in');
+
 
 
 
@@ -184,7 +183,7 @@ Route::get('/', function () {
 //     Route::get('', [CarController::class, 'index'])->name('car.index');
 //     Route::get('trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
 // });
-Route::controller(CarController::class)->as('cars.')->group(function() {
+Route::controller(CarController::class)->as('cars.')->middleware('verified')->group(function() {
     Route::prefix('cars')->group(function(){
         Route::prefix('{id}')->group(function(){
             Route::put('',  'update')->name('update');
@@ -216,13 +215,22 @@ Route::delete('class/{id}', [ClassController::class, 'forceDelete'])->name('clas
 Route::patch('class/{id}', [ClassController::class, 'restore'])->name('class.restore');
 
 
-
+Route::get('/cv' ,  [ExampleController::class ,'cv']);
+Route::get('/task3' ,  [ExampleController::class ,'task3']);
+Route::post('/task3go' ,  [ExampleController::class ,'task3go'])->name('task3in');
 Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 Route::post('insert', [ExampleController::class, 'insert'])->name('insertnumber');
 Route::get('index', [ExampleController::class, 'index']);
 Route::get('about', [ExampleController::class, 'about']);
 Route::get('testOneToOne', [ExampleController::class, 'test']);
+
+
+
+Route::get('task12', [ContactController::class, 'index']);
+Route::post('contact', [ContactController::class, 'send'])->name('contact.send');
+
+
 
 
 Route::get('/download', function (Illuminate\Http\Request $request) {
@@ -244,5 +252,11 @@ Route::post('products', [ProductController::class, 'store'])->name('products.sto
 Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('products/{id}', [ProductController::class, 'update'])->name('products.update');
 
+
+
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
