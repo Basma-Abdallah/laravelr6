@@ -113,5 +113,6 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'Basma@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Basma Abdallah'),
                     ],
+    'reply_to' => ['address' => 'Basma@example.com', 'Basma Abdallah' => 'App Name'],
 
 ];

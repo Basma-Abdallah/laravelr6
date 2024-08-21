@@ -183,24 +183,11 @@ Route::get('/', function () {
 //     Route::get('', [CarController::class, 'index'])->name('car.index');
 //     Route::get('trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
 // });
-Route::controller(CarController::class)->as('cars.')->middleware('verified')->group(function() {
-    Route::prefix('cars')->group(function(){
-        Route::prefix('{id}')->group(function(){
-            Route::put('',  'update')->name('update');
-            Route::delete('',  'forceDelete')->name('Delete');
-            Route::patch('',  'restore')->name('restore');
-            Route::get('edit',  'edit')->name('edit');
-            Route::get('show',  'show')->name('show');
-            Route::get('delete',  'destroy')->name('destroy');
-        });
-        Route::get('create',  'create')->name('create');
-        Route::post('',  'store')->name('store');
-        Route::get('',  'index')->name('index');
-        Route::get('trashed',  'showDeleted')->name('showDeleted');
-    });
-    
-});
 
+Route::middleware(['web'])
+    ->group(function () {
+        require base_path('routes/car.php');  // Load custom admin routes
+    });
 
 Route::get('classes/create', [ClassController::class, 'create'])->name('car.create');
 Route::post('classes', [ClassController::class, 'store'])->name('class.store');
@@ -228,7 +215,7 @@ Route::get('testOneToOne', [ExampleController::class, 'test']);
 
 
 Route::get('task12', [ContactController::class, 'index']);
-Route::post('contact', [ContactController::class, 'send'])->name('contact.send');
+Route::post('task12', [ContactController::class, 'send'])->name('contact.send');
 
 
 

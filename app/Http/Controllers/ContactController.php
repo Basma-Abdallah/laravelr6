@@ -9,12 +9,12 @@ class ContactController extends Controller
 {
     function index()
     {
-        return  view ('task12');
+        return view ('task12');
     }
     public function send(Request $request)
     {
 
-        dd($request);
+        //dd($request);
         // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
