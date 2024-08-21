@@ -1,13 +1,9 @@
 <?php
 
-use Illuminate\Http\RedirectResponse;
-
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
 
-Route::controller(CarController::class)->as('cars.')->middleware('verified')->group(function() {
+Route::controller(App\Http\Controllers\CarController::class)->as('cars.')->middleware('verified')->group(function() {
     Route::prefix('cars')->group(function(){
         Route::prefix('{id}')->group(function(){
             Route::put('',  'update')->name('update');

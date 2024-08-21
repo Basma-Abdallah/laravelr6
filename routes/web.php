@@ -184,11 +184,12 @@ Route::get('/', function () {
 //     Route::get('trashed', [CarController::class, 'showDeleted'])->name('car.showDeleted');
 // });
 
-Route::middleware(['web'])
-    ->group(function () {
-        require base_path('routes/car.php');  // Load custom admin routes
-    });
 
+
+
+
+
+    
 Route::get('classes/create', [ClassController::class, 'create'])->name('car.create');
 Route::post('classes', [ClassController::class, 'store'])->name('class.store');
 Route::get('classes', [ClassController::class, 'index'])->name('class.index');
