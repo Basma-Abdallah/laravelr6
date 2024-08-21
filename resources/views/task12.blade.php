@@ -29,7 +29,8 @@
     <div class="container my-5">
         <div class="py-5 px-md-5 px-1  rounded-1 mx-md-5" style="background-color: #fffffff2;">
             <h2 class="fw-bold fs-1 mb-3 pb-2 text-center">Contact Us</h2>
-            <form action="{{ route('contact.send') }}" method="POST">
+            <form action="{{route('contact.send')}}" method="post">
+                @csrf
                 <div class="form-group mb-3 row">
                     <label for="" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
                     <div class="col-md-10">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button class="btn mt-4 text-white fs-5 fw-bold border-0 py-2 px-md-5 w-100"
+                    <button type="submit" class=" mt-4 text-white fs-5 fw-bold border-0 py-2 px-md-5 w-100"
                         style="background-image: linear-gradient(90deg, #b743ae, #ed429e);">
                         Send
                     </button>
