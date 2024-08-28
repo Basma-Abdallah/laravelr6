@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -190,7 +192,7 @@ Route::get('/', function () {
 
 
     
-Route::get('classes/create', [ClassController::class, 'create'])->name('car.create');
+Route::get('classes/create', [ClassController::class, 'create'])->name('class.create');
 Route::post('classes', [ClassController::class, 'store'])->name('class.store');
 Route::get('classes', [ClassController::class, 'index'])->name('class.index');
 Route::get('class/{id}/edit', [ClassController::class, 'edit'])->name('class.edit');
@@ -221,16 +223,16 @@ Route::post('task12', [ContactController::class, 'send'])->name('contact.send');
 
 
 
-Route::get('/download', function (Illuminate\Http\Request $request) {
-    $file = $request->input('file');
-    $path = public_path('assets/images/' . $file);
+// Route::get('/download', function (Illuminate\Http\Request $request) {
+//     $file = $request->input('file');
+//     $path = public_path('assets/images/' . $file);
 
-    if (file_exists($path)) {
-        return response()->download($path);
-    } else {
-        abort(404, 'File not found');
-    }
-});
+//     if (file_exists($path)) {
+//         return response()->download($path);
+//     } else {
+//         abort(404, 'File not found');
+//     }
+// });
 
 
 
@@ -243,8 +245,36 @@ Route::put('products/{id}', [ProductController::class, 'update'])->name('product
 
 
 
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+
+    Route::controller(CarController::class)->as('cars.')->middleware('verified')->group(function() {
+    Route::prefix('cars')->group(function(){
+        Route::prefix('{id}')->group(function(){
+            Route::put('',  'update')->name('update');
+            Route::delete('',  'forceDelete')->name('Delete');
+            Route::patch('',  'restore')->name('restore');
+            Route::get('edit',  'edit')->name('edit');
+            Route::get('show',  'show')->name('show');
+            Route::get('delete',  'destroy')->name('destroy');
+        });
+        Route::get('create',  'create')->name('create');
+        Route::post('',  'store')->name('store');
+        Route::get('',  'index')->name('index');
+        Route::get('trashed',  'showDeleted')->name('showDeleted');
+    });
+    
+});
+    });
+
+
+
+
+
+
 Auth::routes(['verify' => true]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-

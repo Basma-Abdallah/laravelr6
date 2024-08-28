@@ -6,6 +6,8 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Events\DiagnosingHealth;
 //use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
+
+
 use App\Http\Controllers\CarController;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -14,11 +16,18 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-                 Route::namespace('')->prefix('car')->name('car.')->group(base_path('routes/car.php'));
+                 Route::prefix('admin')->middleware('web')->group(base_path('/routes/admin.php'));
      },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            /**** OTHER MIDDLEWARE ALIASES ****/
+            'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+            'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+            'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+            'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+            'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

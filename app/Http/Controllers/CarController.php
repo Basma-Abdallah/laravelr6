@@ -20,7 +20,7 @@ class CarController extends Controller
         //get all cars from db 
         //return view all cars , cars
         //this code like select*from cars
-
+       //dd(session('test'));
         $cars = Car::get();
         return view ('cars' , compact('cars'));
 
@@ -31,6 +31,7 @@ class CarController extends Controller
      */
     public function create()
     {
+        session()->put('test', 'First Laravel session');
        //return view('add_cars');
        $categories = Category::select('id', 'category_name')->get();
        return view('add_cars', compact('categories'));
@@ -45,13 +46,13 @@ class CarController extends Controller
         //vaidation of data
         $message=[
             'carTitle.string'=>' car Title is string',
-            'carTitle.required'=>' car Title is required',
-            'description.required'=>' car description is required',
-            'description.max'=>' car description max is 100 words',
+            //'carTitle.required'=>' car Title is required',
+           // 'description.required'=>' car description is required',
+            //'description.max'=>' car description max is 100 words',
             'price.decimal'=>' car price in decimel max is 100 words',
-            'image.required'=>' car image is required',
+           // 'image.required'=>' car image is required',
             'image.mimes'=>' car image not supported',
-            'category_id.required'=>'cat is required'
+           //'category_id.required'=>'cat is required'
              ];
 
         $data= $request->validate([
@@ -72,6 +73,7 @@ class CarController extends Controller
         $data['image']= $this->uploadFile($request->image , 'assets/images/cars');
         //dd($data);
          Car::create($data);
+         return redirect()->route('cars.index')->with('car','car added successfully');
         // Create the profile associated with the user
        // $Category = new Category([
        // 'catgeory_name' => $data['category'],
@@ -82,7 +84,7 @@ class CarController extends Controller
 
     // Associate the profile with the user
       //  $CarData->profile()->save($Category);
-        return redirect()->route('cars.index');
+       // return redirect()->route('cars.index');
         
         // $carTitle=$request->carTitle;
         // $price=$request->price;
@@ -172,6 +174,8 @@ class CarController extends Controller
             
             Car::where('id' ,$id)->update($data);
            $data['published']=isset($request->published);
+           $data['image']= $this->uploadFile($request->image , 'assets/images/cars');
+        //dd($data);
             return redirect()->route('cars.index');
         //dd($data);
             
