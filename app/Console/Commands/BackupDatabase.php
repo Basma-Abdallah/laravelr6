@@ -27,16 +27,16 @@ class BackupDatabase extends Command
      */
     public function handle()
     {
-        $databaseName = env('laravelR6');
-        $username = env('root');
-        $password = env('');
-        $host = env('127.0.0.1');
+        $databaseName = env('DB_DATABASE');
+        $username = env('DB_USERNAME');
+        $password = env('DB_PASSWORD');
+        $host = env('DB_HOST');
         $port = env('DB_PORT', '3306');
 
         $date = now()->format('Y-m-d_H-i-s');
         $backupFile = "backup/{$databaseName}_{$date}.sql";
 
-        $command = "mysqldump --user={$username} --password={$password} --host={$host} --port={$port} {$databaseName} > " . storage_path($backupFile);
+        $command = "C:/xampp/mysql/bin/mysqldump.exe --user={$username} --password={$password} --host={$host} --port={$port} {$databaseName} > " . storage_path($backupFile);
     
         exec($command, $output, $return);
 
