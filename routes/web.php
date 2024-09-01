@@ -11,7 +11,8 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\SocialController;
+use Laravel\Socialite\Facades\Socialite;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -273,6 +274,10 @@ Route::group(
     });
 
 
+ 
+    Route::get('auth/github/redirect',[SocialController::class , 'redirect'] )->name('socialLogin');
+     
+    Route::get('auth/github/callback', [SocialController::class , 'callback']);
 
 
 
